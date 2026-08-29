@@ -2,7 +2,7 @@ import { Directive, Input, SimpleChanges, TemplateRef, ViewContainerRef } from '
 
 @Directive({
   standalone: false,
-  selector: '[counterOf',
+  selector: '[counterOf]',
 })
 export class CounterDirective {
   constructor(

@@ -50,7 +50,7 @@
       <div class="btn-group float-right">
         <button
           class="btn btn-outline-primary"
-          *counter="let page of pageCount"
+          *counterOf="pageCount; let page = $implicit"
           (click)="changePage(page)"
           [class.active]="page == selectedPage"
         >
