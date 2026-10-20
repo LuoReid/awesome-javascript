@@ -11,7 +11,7 @@ function requiresAuth(method, url) {
   return (mappings[method.toLowerCase()] || []).find((f) => url.startsWith(f)) !== undefined;
 }
 module.exports = function (req, res, next) {
-  if (req.url.endsWith('/login') && req.method === 'POST') {
+  if (req.url.endsWith('/login') && req.method == 'POST') {
     if (req.body.username === USERNAME && req.body.password === PASSWORD) {
       const token = jwt.sign({ username: USERNAME, expriesIn: '1h' }, APPSECRET);
       res.json({ success: true, token });
@@ -22,8 +22,8 @@ module.exports = function (req, res, next) {
     return;
   } else if (requiresAuth(req.method, req.url)) {
     let token = req.headers['authorization'];
-    if (token && token.startsWith('Bearer ')) {
-      token = token.substring(7, token.length - 1);
+    if (token && token.startsWith('Bearer<')) {
+      token = token.substring(7);
       try {
         const decoded = jwt.verify(token, APPSECRET);
         req.user = decoded;
